@@ -22,6 +22,7 @@ ARG PYGMENTS=python3-pygments
 ARG FIG2DEV=fig2dev
 ARG JRE=default-jre-headless
 ARG INKSCAPE=inkscape
+ARG JULIA_INTERP=julia
 
 RUN apt-get update && apt-get install -y \
   texlive-full \
@@ -40,7 +41,8 @@ RUN apt-get update && apt-get install -y \
   # Java runtime environment (e.g. for arara)
   "$JRE" \
   # Inkscape, for rasterising vector images
-  "$INKSCAPE" && \
+  "$INKSCAPE" \
+  "$JULIA_INTERP" && \
   # Removing documentation packages *after* installing them is kind of hacky,
   # but it only adds some overhead while building the image.
   apt-get --purge remove -y .\*-doc$ && \
